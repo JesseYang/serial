@@ -69,7 +69,7 @@ main()
 	printf("start send and receive data\n");
 */
 
-	Serial serial();
+	Serial serial;
 
 	while(1)
 	{

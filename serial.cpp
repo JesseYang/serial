@@ -47,18 +47,17 @@ Serial::Serial() {
 	if(tcsetattr(fd, TCSANOW, &opt) != 0)
 	{
 		perror("serial error");
-		return -1;
 	}
 }
 
 int Serial::read(char* read_buf, int len) {
 	bzero(read_buf, len);
-	int n = read(this->fd, read_buf, len);
+	int n = ::read(this->fd, read_buf, len);
 	return n;
 }
 
 int Serial::write(string write_buffer) {
-	int n = write(this->fd, (write_buffer + "\n").c_str(), write_buffer.length() + 1);
+	int n = ::write(this->fd, (write_buffer + "\n").c_str(), write_buffer.length() + 1);
 	return n;
 }
 
