@@ -9,8 +9,8 @@ class Serial {
 	private:
 		int fd;
 	public:
-		int myRead(char*, int);
-		int myWrite(string);
+		int read(char*, int);
+		int write(string);
 		Serial();
 };
 

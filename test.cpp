@@ -8,6 +8,7 @@
 #include <termios.h>
 #include <errno.h>
 #include "tool.h"
+#include "serial.h"
 
 using namespace std;
  
@@ -19,10 +20,13 @@ main()
 	int n = 0;
 	char read_buf[512];
 	char write_buf[512];
-	struct termios opt;
+	
 	string server_ip = "192.168.0.104";
 	int server_port = 8888;
 
+
+/*
+	struct termios opt;
 	fd = open("/dev/ttyATH0", O_RDWR|O_NOCTTY|O_NDELAY);
 	if(fd == -1)
 	{
@@ -63,14 +67,19 @@ main()
 	}
 
 	printf("start send and receive data\n");
+*/
+
+	Serial serial();
 
 	while(1)
 	{
-		n = write(fd, "AT+ENBR\n", 8);
+		n = serial.write("AT+ENBR");
+		// n = write(fd, "AT+ENBR\n", 8);
 		printf("write %d chars\n", n);
 
-		bzero(read_buf, sizeof(read_buf));
-		n = read(fd, read_buf, sizeof(read_buf));
+		n = serial.read(read_buf, sizeof(read_buf));
+		// bzero(read_buf, sizeof(read_buf));
+		// n = read(fd, read_buf, sizeof(read_buf));
 		printf("read %d chars\n", n);
 		printf("read content: %s\n", read_buf);
 
